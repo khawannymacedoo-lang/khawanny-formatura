@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="only light">
+<title>Formatura - Khawanny</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-900:#3a0a10;
+    --navy-800:#54101a;
+    --navy-700:#6e1522;
+    --gold-500:#c9a227;
+    --gold-300:#e8c874;
+    --gold-100:#f4e9c8;
+    --cream-50:#f8f1e1;
+    --cream-100:#efe0c4;
+    --ink-900:#2a1210;
+    --ink-600:#6b4a3f;
+    --hairline: rgba(201,162,39,0.4);
+    --max: 780px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; color-scheme:only light;}
+  body{
+    margin:0;
+    background:var(--cream-50);
+    color:var(--ink-900);
+    font-family:'Manrope', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3, .display{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    margin:0;
+  }
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      radial-gradient(circle at 50% 0%, rgba(201,162,39,0.12), transparent 60%),
+      linear-gradient(180deg, var(--navy-900), var(--navy-800));
+    color:var(--cream-100);
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:64px 24px;
+    position:relative;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:18px;
+    border:1px solid rgba(201,162,39,0.5);
+    pointer-events:none;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:24px;
+    border:1px solid rgba(201,162,39,0.25);
+    pointer-events:none;
+  }
+  .hero-watermark{
+    position:absolute;
+    top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    font-family:'Cinzel', serif;
+    font-size:min(38vw, 22rem);
+    color:rgba(201,162,39,0.07);
+    letter-spacing:0.05em;
+    line-height:1;
+    white-space:nowrap;
+    pointer-events:none;
+    user-select:none;
+  }
+  .seal{
+    width:132px; height:auto; margin-bottom:26px;
+    opacity:0;
+    filter:drop-shadow(0 0 18px rgba(201,162,39,0.15));
+    animation: rise 1s ease-out 0.1s forwards;
+    position:relative;
+  }
+  .hero-photo{
+    width:min(78vw, 300px);
+    aspect-ratio:1/1;
+    border-radius:3px;
+    padding:8px;
+    border:1px solid rgba(201,162,39,0.5);
+    margin-bottom:28px;
+    opacity:0;
+    animation: rise 1s ease-out 0s forwards;
+    position:relative;
+  }
+  .hero-photo::before{
+    content:"";
+    position:absolute;
+    inset:-9px;
+    border:1px solid rgba(201,162,39,0.25);
+    border-radius:5px;
+  }
+  .hero-photo img{
+    width:100%; height:100%;
+    border-radius:1px;
+    object-fit:cover;
+    display:block;
+  }
+  .hero-photo-fallback{
+    display:none;
+    width:100%; height:100%;
+    border-radius:1px;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:10px;
+    background:rgba(201,162,39,0.06);
+  }
+  .hero-photo.is-empty .hero-photo-fallback{ display:flex;}
+  .hero-photo-fallback svg{ width:52px; height:52px;}
+  .hero-photo-fallback span{
+    font-size:0.7rem;
+    letter-spacing:0.06em;
+    color:rgba(201,162,39,0.7);
+  }
+  .hero h1{
+    font-family:'Cinzel', serif;
+    font-size:clamp(2.4rem, 6.4vw, 4rem);
+    line-height:1.15;
+    font-style:normal;
+    font-weight:500;
+    letter-spacing:0.02em;
+    color:var(--cream-100);
+    opacity:0;
+    animation: rise 1s ease-out 0.55s forwards;
+  }
+  .hero h1 .surname{
+    display:block;
+    font-family:'Cinzel', serif;
+    font-size:0.32em;
+    font-style:normal;
+    font-weight:400;
+    letter-spacing:0.16em;
+    color:var(--gold-300);
+    margin-top:14px;
+  }
+  .hero .course{
+    margin-top:14px;
+    font-size:1.05rem;
+    color:var(--gold-100);
+    letter-spacing:0.03em;
+    opacity:0;
+    animation: rise 1s ease-out 0.75s forwards;
+  }
+  .divider-line{
+    width:56px; height:1px; background:var(--gold-500);
+    margin:32px auto;
+    opacity:0;
+    animation: rise 1s ease-out 0.9s forwards;
+  }
+  .hero .date{
+    font-size:1.15rem;
+    color:var(--cream-50);
+    opacity:0;
+    animation: rise 1s ease-out 1.05s forwards;
+  }
+
+  @keyframes rise{
+    from{opacity:0; transform:translateY(14px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .seal, .hero-photo, .hero h1, .hero .course, .divider-line, .hero .date{
+      animation:none !important; opacity:1 !important; transform:none !important;
+    }
+  }
+
+  .countdown{
+    margin-top:40px;
+    display:flex;
+    gap:22px;
+    opacity:0;
+    animation: rise 1s ease-out 1.2s forwards;
+  }
+  .countdown .cell{ text-align:center; min-width:56px;}
+  .countdown .num{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.9rem;
+    color:var(--gold-300);
+    font-variant-numeric: tabular-nums;
+  }
+  .countdown .lbl{
+    font-size:0.68rem;
+    letter-spacing:0.08em;
+    color:rgba(247,242,231,0.6);
+    margin-top:2px;
+  }
+  .hero-music{
+    width:100%;
+    max-width:340px;
+    margin:40px auto 0 auto;
+    border-radius:10px;
+    overflow:hidden;
+    opacity:0;
+    animation: rise 1s ease-out 1.3s forwards;
+  }
+  .hero-music iframe{ display:block;}
+  @media (prefers-reduced-motion: reduce){
+    .hero-music{ animation:none !important; opacity:1 !important;}
+  }
+
+  /* ---------- SECTION SHELLS ---------- */
+  section{padding:88px 0;}
+  .on-navy{ background:var(--navy-800); color:var(--cream-100);}
+  .on-navy .hairline{border-color:rgba(228,201,122,0.25);}
+  h2.section-title{
+    font-size:clamp(1.7rem, 4vw, 2.3rem);
+    font-style:italic;
+    font-weight:500;
+    text-align:center;
+    margin-bottom:44px;
+  }
+  .on-navy h2.section-title{color:var(--gold-100);}
+
+  /* ---------- DEDICATÓRIA ---------- */
+  .dedicatoria p{
+    font-size:1.08rem;
+    line-height:1.85;
+    max-width:60ch;
+    margin:0 auto 22px auto;
+    color:var(--ink-900);
+  }
+  .dedicatoria .opening{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:1.4rem;
+    text-align:center;
+    color:var(--navy-800);
+    max-width:32ch;
+    margin:0 auto 36px auto;
+    line-height:1.4;
+  }
+  .signature{
+    text-align:center;
+    margin-top:32px;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    color:var(--gold-500);
+    font-size:1.15rem;
+  }
+  .editnote{
+    text-align:center;
+    font-size:0.78rem;
+    color:var(--ink-600);
+    margin-top:28px;
+    border-top:1px dashed var(--hairline);
+    padding-top:16px;
+  }
+
+  /* ---------- SUMÁRIO ---------- */
+  .toc{
+    max-width:560px;
+    margin:0 auto 52px auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(190px, 1fr));
+    gap:12px 28px;
+    padding:26px 30px;
+    border:1px solid var(--hairline);
+  }
+  .toc a{
+    display:flex;
+    align-items:baseline;
+    text-decoration:none;
+    color:var(--ink-900);
+    font-size:0.86rem;
+  }
+  .toc a::after{
+    content:"";
+    flex:1;
+    border-bottom:1px dotted var(--ink-600);
+    margin:0 0 3px 6px;
+  }
+  .toc a:hover{ color:var(--gold-500);}
+  .toc a:hover::after{ border-color:var(--gold-500);}
+
+  /* ---------- CARTAS / DEDICATÓRIAS ---------- */
+  .letter-list{
+    max-width:560px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+  }
+  .letter{
+    padding:26px 0;
+    border-bottom:1px dashed var(--hairline);
+  }
+  .letter:last-child{ border-bottom:none;}
+  .letter h3{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:1.1rem;
+    color:var(--navy-800);
+    margin-bottom:8px;
+  }
+  .letter h3::before{
+    content:"§ ";
+    color:var(--gold-500);
+    font-style:normal;
+  }
+  .letter h3{ text-align:center;}
+  .letter-portrait{
+    margin:0 auto 22px auto !important;
+  }
+  .medium-portrait{
+    width:min(55vw, 200px) !important;
+    margin:0 auto 22px auto !important;
+  }
+  .photo-trio{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    margin:0 auto 22px auto;
+    max-width:400px;
+  }
+  .trio-cell{ margin:0; flex:1; text-align:center;}
+  .trio-photo{
+    aspect-ratio:1/1;
+    border-radius:2px;
+    padding:5px;
+    border:1px solid rgba(201,162,39,0.5);
+    position:relative;
+  }
+  .trio-photo img{
+    width:100%; height:100%;
+    border-radius:1px;
+    object-fit:cover;
+    display:block;
+  }
+  .trio-fallback{
+    display:none;
+    width:100%; height:100%;
+    align-items:center;
+    justify-content:center;
+    background:rgba(201,162,39,0.06);
+  }
+  .trio-photo.is-empty .trio-fallback{ display:flex;}
+  .trio-fallback svg{ width:22px; height:22px;}
+  .trio-cell figcaption{
+    margin-top:8px;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:0.8rem;
+    color:var(--ink-600);
+  }
+  .inline-photo{
+    display:inline-block;
+    width:96px; height:96px;
+    border-radius:50%;
+    vertical-align:middle;
+    margin:0 4px;
+    border:1px solid var(--hairline);
+    padding:4px;
+    position:relative;
+    overflow:hidden;
+  }
+  .inline-photo img{
+    width:100%; height:100%;
+    border-radius:50%;
+    object-fit:cover;
+    display:block;
+  }
+  .inline-fallback{
+    display:none;
+    width:100%; height:100%;
+    border-radius:50%;
+    align-items:center;
+    justify-content:center;
+    background:rgba(201,162,39,0.08);
+  }
+  .inline-photo.is-empty .inline-fallback{ display:flex;}
+  .inline-fallback svg{ width:32px; height:32px;}
+  .letter .placeholder{
+    font-size:0.85rem;
+    color:var(--ink-600);
+    margin:0;
+  }
+  .letter .body p:first-of-type::first-letter{
+    font-family:'Cinzel', serif;
+    font-size:2.5em;
+    float:left;
+    line-height:0.8;
+    padding:5px 8px 0 0;
+    color:var(--gold-500);
+  }
+  .letter .body p{
+    font-size:0.98rem;
+    line-height:1.85;
+    color:var(--ink-900);
+    margin:0 0 16px 0;
+  }
+  .letter .body p:last-child{ margin-bottom:0;}
+  .letter .more{ margin-top:4px;}
+  .letter .more summary{
+    cursor:pointer;
+    list-style:none;
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    font-size:0.82rem;
+    font-style:italic;
+    color:var(--gold-500);
+    border-bottom:1px solid var(--hairline);
+    padding-bottom:2px;
+  }
+  .letter .more summary::-webkit-details-marker{ display:none;}
+  .letter .more summary .arrow{
+    width:9px; height:6px;
+    transition: transform 0.2s ease;
+  }
+  .letter .more[open] summary .arrow{ transform:rotate(180deg);}
+  .letter .more-body{ margin-top:18px;}
+  .letter .song-credit{
+    font-size:0.82rem;
+    font-style:italic;
+    color:var(--ink-600);
+    margin-top:16px;
+  }
+
+  /* ---------- EPÍGRAFE ---------- */
+  .epigraph{ padding:76px 0;}
+  .epigraph .rule{ width:36px; height:1px; background:var(--gold-500); margin:0 auto 30px auto;}
+  .epigraph blockquote{
+    margin:0 auto;
+    max-width:34ch;
+    text-align:center;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:clamp(1.35rem, 3.6vw, 2rem);
+    line-height:1.5;
+    color:var(--navy-800);
+  }
+
+  /* ---------- O DIREITO E EU ---------- */
+  .jornada .scales{
+    width:52px; height:auto;
+    margin:0 auto 20px auto;
+    display:block;
+  }
+  .jornada .essay{ max-width:60ch; margin:0 auto;}
+  .jornada .essay p{
+    font-size:1.02rem;
+    line-height:1.9;
+    color:rgba(247,242,231,0.82);
+    margin:0 0 24px 0;
+    text-align:left;
+  }
+  .jornada .essay p:last-child{ margin-bottom:0;}
+
+  /* ---------- PROGRAMAÇÃO ---------- */
+  .timeline{ max-width:460px; margin:0 auto;}
+  .tl-item{
+    display:grid;
+    grid-template-columns:76px 1px 1fr;
+    column-gap:24px;
+    position:relative;
+  }
+  .tl-item .time{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.15rem;
+    color:var(--gold-300);
+    text-align:right;
+    padding-top:2px;
+  }
+  .tl-item .rail{ background:var(--hairline); position:relative;}
+  .tl-item .dot{
+    width:9px; height:9px; border-radius:50%;
+    background:var(--gold-500);
+    position:absolute; left:50%; top:6px;
+    transform:translateX(-50%);
+  }
+  .tl-item .content{ padding-bottom:44px;}
+  .tl-item:last-child .rail{ background: linear-gradient(var(--hairline), transparent);}
+  .tl-item .content h3{ font-size:1.15rem; color:var(--cream-100); font-weight:500; margin-bottom:6px;}
+  .tl-item .content p{ margin:0; color:rgba(247,242,231,0.72); font-size:0.95rem; line-height:1.6;}
+
+  .venue-card{
+    max-width:520px;
+    margin:56px auto 0 auto;
+    border:1px solid var(--hairline);
+    border-radius:2px;
+    overflow:hidden;
+    background:rgba(255,255,255,0.02);
+  }
+  .venue-card iframe{width:100%; height:220px; border:0; filter:grayscale(0.15) contrast(1.05);}
+  .venue-card .addr{
+    padding:18px 22px;
+    display:flex; justify-content:space-between; align-items:center; gap:16px;
+    flex-wrap:wrap;
+  }
+  .venue-card .addr p{margin:0; font-size:0.92rem; color:rgba(247,242,231,0.85); line-height:1.5;}
+  .venue-card .addr a{
+    font-size:0.82rem; color:var(--gold-300); white-space:nowrap;
+    border-bottom:1px solid var(--gold-500); padding-bottom:2px;
+  }
+
+  /* ---------- DETALHES DA PROGRAMAÇÃO ---------- */
+  .info-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));
+    gap:40px;
+    max-width:720px;
+    margin:64px auto 0 auto;
+  }
+  .info-cat h3{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:1rem;
+    color:var(--gold-300);
+    padding-bottom:10px;
+    margin-bottom:16px;
+    border-bottom:1px solid var(--hairline);
+  }
+  .info-cat ul{ list-style:none; margin:0; padding:0;}
+  .info-cat li{
+    margin-bottom:13px;
+    font-size:0.88rem;
+    line-height:1.55;
+    color:rgba(247,242,231,0.8);
+  }
+  .info-cat li .time{
+    color:var(--gold-100);
+    font-weight:600;
+    margin-right:6px;
+    font-variant-numeric:tabular-nums;
+  }
+  .info-cat li.sub{
+    padding-left:14px;
+    font-size:0.82rem;
+    font-style:italic;
+    color:rgba(247,242,231,0.55);
+  }
+
+  .notice{
+    max-width:520px;
+    margin:56px auto 0 auto;
+    text-align:center;
+    font-size:0.82rem;
+    line-height:1.7;
+    color:rgba(247,242,231,0.55);
+    border-top:1px dashed var(--hairline);
+    padding-top:20px;
+  }
+
+  /* ---------- CARDÁPIO ---------- */
+  .menu-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:44px;
+    max-width:680px;
+    margin:0 auto;
+  }
+  .menu-cat h3{
+    font-size:0.95rem;
+    color:var(--navy-800);
+    padding-bottom:10px;
+    margin-bottom:16px;
+    border-bottom:1px solid var(--hairline);
+  }
+  .menu-cat ul{ list-style:none; margin:0; padding:0;}
+  .menu-cat li{ margin-bottom:16px;}
+  .menu-cat .dish{ font-weight:600; font-size:0.96rem; color:var(--ink-900);}
+  .menu-cat .tag{
+    display:block;
+    font-size:0.72rem;
+    color:var(--gold-500);
+    font-style:italic;
+    margin-bottom:2px;
+  }
+
+  /* ---------- INGRESSOS ---------- */
+  .humor-notes{
+    max-width:500px;
+    margin:0 auto 52px auto;
+    text-align:center;
+    padding-bottom:40px;
+    border-bottom:1px dashed var(--hairline);
+  }
+  .humor-notes .joke-lead{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:1.2rem;
+    color:var(--gold-300);
+    margin:26px 0 8px 0;
+  }
+  .humor-notes .joke-lead:first-child{ margin-top:0;}
+  .humor-notes p{
+    font-size:0.92rem;
+    line-height:1.75;
+    color:rgba(247,242,231,0.82);
+    margin:0;
+  }
+  .humor-notes ul.joke-rules{
+    list-style:none;
+    margin:16px 0 0 0;
+    padding:0;
+    font-size:0.88rem;
+    color:rgba(247,242,231,0.82);
+    display:inline-block;
+    text-align:left;
+  }
+  .humor-notes ul.joke-rules li{ margin-bottom:6px;}
+  .humor-notes ul.joke-rules li::before{ content:"• "; color:var(--gold-500);}
+  .tickets{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(190px, 1fr));
+    gap:18px;
+    max-width:640px;
+    margin:0 auto;
+  }
+  .ticket{
+    border:1px solid var(--hairline);
+    padding:26px 20px;
+    text-align:center;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .ticket:hover{ transform:translateY(-4px); border-color:var(--gold-500);}
+  .ticket .name{ font-size:0.95rem; color:var(--cream-100); margin-bottom:10px;}
+  .ticket .price{
+    font-family:'Cormorant Garamond', serif; font-size:1.5rem; color:var(--gold-300);
+  }
+  .ticket .price sup{ font-size:0.9rem; margin-right:2px;}
+
+  .paymethods{
+    display:flex; justify-content:center; gap:12px;
+    margin:40px 0 8px 0; flex-wrap:wrap;
+  }
+  .paymethods span{
+    font-size:0.8rem;
+    color:var(--gold-100);
+    border:1px solid var(--hairline);
+    padding:6px 16px;
+  }
+
+  .cta-row{ text-align:center; margin-top:36px;}
+  .cta{
+    display:inline-block;
+    background:var(--gold-500);
+    color:var(--navy-900);
+    font-weight:600;
+    font-size:0.92rem;
+    padding:14px 34px;
+    text-decoration:none;
+    letter-spacing:0.01em;
+  }
+  .cta:hover{ background:var(--gold-300);}
+  .cta:focus-visible, a:focus-visible, button:focus-visible{
+    outline:2px solid var(--gold-500); outline-offset:3px;
+  }
+  .cta-note{ font-size:0.78rem; color:rgba(247,242,231,0.55); margin-top:14px;}
+
+  /* ---------- PÁGINA DOS AMIGOS ---------- */
+  .friends-intro{
+    text-align:center;
+    font-size:0.92rem;
+    font-style:italic;
+    font-family:'Cormorant Garamond', serif;
+    color:var(--ink-600);
+    margin:-18px 0 36px 0;
+  }
+  .friends-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:8px;
+    max-width:640px;
+    margin:0 auto;
+  }
+  .friends-cell{
+    position:relative;
+    aspect-ratio:1/1;
+    overflow:hidden;
+    border:1px solid var(--hairline);
+    background:rgba(201,162,39,0.04);
+  }
+  .friends-cell img{
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .friends-fallback{
+    display:none;
+    position:absolute; inset:0;
+    align-items:center;
+    justify-content:center;
+  }
+  .friends-cell.is-empty .friends-fallback{ display:flex;}
+  .friends-fallback svg{ width:18px; height:18px; opacity:0.55;}
+  @media (min-width:560px){
+    .friends-grid{ grid-template-columns:repeat(5, 1fr);}
+  }
+
+  /* ---------- GALERIA ---------- */
+  .gallery-grid{
+    column-count:2;
+    column-gap:10px;
+    max-width:560px;
+    margin:0 auto;
+  }
+  .gallery-cell{
+    position:relative;
+    overflow:hidden;
+    border:1px solid var(--hairline);
+    background:rgba(201,162,39,0.04);
+    break-inside:avoid;
+    margin-bottom:10px;
+  }
+  .gallery-cell img{
+    width:100%; height:auto;
+    display:block;
+  }
+  .gallery-cell.is-empty{
+    aspect-ratio:3/4;
+  }
+  .gallery-fallback{
+    display:none;
+    position:absolute; inset:0;
+    align-items:center;
+    justify-content:center;
+  }
+  .gallery-cell.is-empty .gallery-fallback{ display:flex;}
+  .gallery-fallback svg{ width:26px; height:26px; opacity:0.6;}
+  @media (min-width:560px){
+    .gallery-grid{ column-count:3;}
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--navy-900);
+    color:rgba(247,242,231,0.5);
+    text-align:center;
+    padding:44px 24px;
+    font-size:0.82rem;
+  }
+  footer .fdate{ color:var(--gold-300); font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1rem; margin-bottom:8px;}
+
+  @media (max-width:560px){
+    section{padding:64px 0;}
+    .tl-item{grid-template-columns:60px 1px 1fr; column-gap:16px;}
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-watermark" aria-hidden="true">2027</div>
+
+  <div class="hero-photo">
+    <img src="foto-khawanny.jpg" alt="Khawanny" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');">
+    <div class="hero-photo-fallback">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.1"/>
+        <circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.1"/>
+        <path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.1"/>
+      </svg>
+      <span>sua foto aqui</span>
+    </div>
+  </div>
+
+  <svg class="seal" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="70" cy="70" r="62" stroke="#c9a227" stroke-width="1"/>
+    <circle cx="70" cy="70" r="52" stroke="#c9a227" stroke-width="0.6"/>
+    <text x="27.12" y="38.85" transform="rotate(-54.00 27.12 38.85)" text-anchor="middle" font-size="6" fill="#c9a227" style="font-family:'Cinzel',serif;">F</text>
+    <text x="30.61" y="34.54" transform="rotate(-48.00 30.61 34.54)" text-anchor="middle" font-size="6" fill="#c9a227" style="font-family:'Cinzel',serif;">O</text>
+    <text x="34.54" y="30.61" transform="rotate(-42.00 34.54 30.61)" text-anchor="middle" font-size="6" fill="#c9a227" style="font-family:'Cinzel',serif;">R</text>
+    <text x="38.85" y="27.12" transform="rotate(-36.00 38.85 27.12)" text-anchor="middle" font-size="6" fill="#c9a227" style="font-family:'Cinzel',serif;">M</text>
+    <text x="43.50" y="24.10" transform="rotate(-30.00 43.50 24.10)" text-anchor="middle" font-size="6" fill="#c9a227" style="font-family:'Cinzel',serif;">A</text>
+    <text x="48.44" y="21.58" transform="rotate(-24.00 48.44 21.58)" text-anchor="middle" font-size="6" fill="#c9a227" style="font-family:'Cinzel',serif;">T</text>
+    <text x="53.62" y="19.59" transform="rotate(-18.00 53.62 19.59)" text-anchor="middle" font-size="6" fill="#c9a227" style="font-family:'Cinzel',serif;">U</text>
+    <text x="58.98" y="18.16" transform="rotate(-12.00 58.98 18.16)" text-anchor="middle" font-size="6" fill="#c9a227" style="font-family:'Cinzel',serif;">R</text>
+    <text x="64.46" y="17.29" transform="rotate(-6.00 64.46 17.29)" text-anchor="middle" font-size="6" fill="#c9a227" style="font-family:'Cinzel',serif;">A</text>
+    <text x="75.54" y="17.29" transform="rotate(6.00 75.54 17.29)" text-anchor="middle" font-size="6" fill="#c9a227" style="font-family:'Cinzel',serif;">·</text>
+    <text x="86.38" y="19.59" transform="rotate(18.00 86.38 19.59)" text-anchor="middle" font-size="6" fill="#c9a227" style="font-family:'Cinzel',serif;">D</text>
+    <text x="91.56" y="21.58" transform="rotate(24.00 91.56 21.58)" text-anchor="middle" font-size="6" fill="#c9a227" style="font-family:'Cinzel',serif;">I</text>
+    <text x="96.50" y="24.10" transform="rotate(30.00 96.50 24.10)" text-anchor="middle" font-size="6" fill="#c9a227" style="font-family:'Cinzel',serif;">R</text>
+    <text x="101.15" y="27.12" transform="rotate(36.00 101.15 27.12)" text-anchor="middle" font-size="6" fill="#c9a227" style="font-family:'Cinzel',serif;">E</text>
+    <text x="105.46" y="30.61" transform="rotate(42.00 105.46 30.61)" text-anchor="middle" font-size="6" fill="#c9a227" style="font-family:'Cinzel',serif;">I</text>
+    <text x="109.39" y="34.54" transform="rotate(48.00 109.39 34.54)" text-anchor="middle" font-size="6" fill="#c9a227" style="font-family:'Cinzel',serif;">T</text>
+    <text x="112.88" y="38.85" transform="rotate(54.00 112.88 38.85)" text-anchor="middle" font-size="6" fill="#c9a227" style="font-family:'Cinzel',serif;">O</text>
+    <line x1="70" y1="44" x2="70" y2="86" stroke="#c9a227" stroke-width="1.1"/>
+    <circle cx="70" cy="50" r="2.6" fill="none" stroke="#c9a227" stroke-width="1"/>
+    <line x1="47" y1="56" x2="93" y2="56" stroke="#c9a227" stroke-width="1.1"/>
+    <line x1="47" y1="56" x2="43" y2="72" stroke="#c9a227" stroke-width="0.8"/>
+    <line x1="47" y1="56" x2="51" y2="72" stroke="#c9a227" stroke-width="0.8"/>
+    <path d="M41 72 Q47 80 53 72" stroke="#c9a227" stroke-width="1" fill="none"/>
+    <line x1="93" y1="56" x2="89" y2="72" stroke="#c9a227" stroke-width="0.8"/>
+    <line x1="93" y1="56" x2="97" y2="72" stroke="#c9a227" stroke-width="0.8"/>
+    <path d="M87 72 Q93 80 99 72" stroke="#c9a227" stroke-width="1" fill="none"/>
+    <line x1="70" y1="86" x2="70" y2="92" stroke="#c9a227" stroke-width="1.1"/>
+    <line x1="55" y1="92" x2="85" y2="92" stroke="#c9a227" stroke-width="1.1"/>
+    <g transform="translate(46,106) rotate(15)">
+      <path d="M0 0 C-7 -3, -11 1, -12 8 C-6 7, -1 4, 0 0Z" fill="none" stroke="#c9a227" stroke-width="0.9"/>
+      <path d="M0 11 C-7 8, -11 12, -12 19 C-6 18, -1 15, 0 11Z" fill="none" stroke="#c9a227" stroke-width="0.9"/>
+      <path d="M0 22 C-7 19, -11 23, -12 30 C-6 29, -1 26, 0 22Z" fill="none" stroke="#c9a227" stroke-width="0.9"/>
+    </g>
+    <g transform="translate(94,106) rotate(-15) scale(-1,1)">
+      <path d="M0 0 C-7 -3, -11 1, -12 8 C-6 7, -1 4, 0 0Z" fill="none" stroke="#c9a227" stroke-width="0.9"/>
+      <path d="M0 11 C-7 8, -11 12, -12 19 C-6 18, -1 15, 0 11Z" fill="none" stroke="#c9a227" stroke-width="0.9"/>
+      <path d="M0 22 C-7 19, -11 23, -12 30 C-6 29, -1 26, 0 22Z" fill="none" stroke="#c9a227" stroke-width="0.9"/>
+    </g>
+  </svg>
+  <h1>Khawanny<span class="surname">Macedo de Souza</span></h1>
+  <div class="course">&amp; Família, tem a honra de convidar</div>
+  <div class="divider-line"></div>
+  <div class="date">30 de janeiro de 2027 · Foz do Iguaçu</div>
+
+  <div class="countdown" id="countdown" aria-label="Contagem regressiva para o evento">
+    <div class="cell"><div class="num" id="cd-days">00</div><div class="lbl">dias</div></div>
+    <div class="cell"><div class="num" id="cd-hours">00</div><div class="lbl">horas</div></div>
+    <div class="cell"><div class="num" id="cd-min">00</div><div class="lbl">min</div></div>
+    <div class="cell"><div class="num" id="cd-sec">00</div><div class="lbl">seg</div></div>
+  </div>
+
+  <div class="hero-music">
+    <iframe src="https://open.spotify.com/embed/track/4UzGCk5poJxCwDP4HpXlom?utm_source=generator&theme=0" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  </div>
+</section>
+
+<section class="epigraph">
+  <div class="wrap">
+    <div class="rule"></div>
+    <blockquote>Não faça planos pequenos, porque eles não têm a magia de mexer com o sangue humano.</blockquote>
+  </div>
+</section>
+
+<section class="cartas">
+  <div class="wrap">
+    <div class="letter-list">
+      <div class="letter">
+        <div class="hero-photo letter-portrait">
+          <img src="foto-infancia.jpg" alt="Mensagem da infância" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');">
+          <div class="hero-photo-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/>
+              <circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/>
+              <path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/>
+            </svg><span>sua foto aqui</span></div>
+        </div>
+        <h3>Mensagem da infância</h3>
+        <div class="body">
+          <p>Havia uma menina livre como vento solto, levada como quem não cabia dentro de regras, sorridente como se já soubesse, desde muito cedo, que a alegria também é uma forma de coragem. As dificuldades vinham, e ela as atravessava sorrindo. Não porque não doíam, mas porque ela já carregava dentro de si algo maior do que qualquer obstáculo.</p>
+          <p>Ela era um pouco menino, um pouco desastrada, um pouco furacão, e inteiramente brigona: das que não conseguiam ficar caladas diante de uma injustiça, das que batiam no peito por qualquer causa que sentissem justa, das que defendiam o oprimido antes mesmo de entender o peso dessa palavra. Sem saber, ela já ensaiava, em brincadeiras de infância, o gesto que um dia se tornaria profissão; o de lutar pelos outros como se fosse por si mesma.</p>
+          <p>O pai e a mãe olhavam pra ela e viam grandiosidade. O tio olhava pra ela e enxergava uma advogada, ou talvez uma juíza. E aquela menina, sem entender ainda o tamanho dessas palavras, guardou cada uma delas como semente, plantadas cedo demais pra ela compreender, mas certeiras o suficiente pra florescer exatamente no que precisavam florescer.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-photo letter-portrait">
+      <img src="foto-familia.jpg" alt="Família" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');">
+      <div class="hero-photo-fallback">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg>
+        <span>sua foto aqui</span>
+      </div>
+    </div>
+
+    <h2 class="section-title" style="color:var(--navy-800)">Homenagens</h2>
+    <nav class="toc" aria-label="Sumário das homenagens">
+      <a href="#h-pai"><span>Meu pai</span></a>
+      <a href="#h-mae"><span>Minha mãe</span></a>
+      <a href="#h-avos-mat"><span>Avós maternos</span></a>
+      <a href="#h-avos-pat"><span>Avós paternos</span></a>
+      <a href="#h-tios"><span>Tios</span></a>
+      <a href="#h-primos"><span>Meus primos</span></a>
+      <a href="#h-irmaos"><span>Meus irmãos</span></a>
+      <a href="#h-marido"><span>Meu marido</span></a>
+      <a href="#h-filho"><span>Meu filho</span></a>
+      <a href="#h-amigos"><span>Minhas amigas e amigos</span></a>
+    </nav>
+    <div class="letter-list">
+      <div class="letter" id="h-pai">
+        <div class="hero-photo letter-portrait">
+          <img src="foto-pai.jpg" alt="Meu pai" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');">
+          <div class="hero-photo-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/>
+              <circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/>
+              <path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/>
+            </svg><span>sua foto aqui</span></div>
+        </div>
+        <h3>Meu pai</h3>
+        <div class="body">
+          <p>Pai, você é feito de coração inteiro, dessas pessoas raras que amam sem pedir nada em troca. Foi com você que aprendi a questionar o mundo antes de simplesmente aceitá-lo, a filosofar sobre a vida como quem tempera um café devagar, com atenção, sem pressa. Você nunca me deu respostas prontas; me ensinou a fazer as perguntas certas, e isso mudou completamente o jeito como eu enxergo tudo ao meu redor.</p>
+          <p>Aprendi com você que amar é também não julgar, que respeitar é olhar pra todos como iguais, sem exceção, sem hierarquia, sem meias verdades. Você me encorajou a duvidar, a pensar por conta própria, a não ter medo de discordar quando fosse preciso, e isso, pai, é um dos maiores presentes que alguém pode dar a um filho.</p>
+          <p>Cada conversa nossa foi uma aula disfarçada de papo qualquer, sempre embalada por uma trilha sonora que ensinou tanto quanto as palavras. Nossos silêncios ao som de uma boa música sempre disseram mais do que qualquer discurso. Pai, obrigada por me mostrar que existe força na ternura, e que ser sensível nunca foi sinônimo de ser fraco.</p>
+          <p class="song-credit">Inspirado em Índios, Legião Urbana.</p>
+        </div>
+      </div>
+      <div class="letter" id="h-mae">
+        <div class="hero-photo letter-portrait">
+          <img src="foto-mae.jpg" alt="Minha mãe" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');">
+          <div class="hero-photo-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/>
+              <circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/>
+              <path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/>
+            </svg><span>sua foto aqui</span></div>
+        </div>
+        <h3>Minha mãe</h3>
+        <div class="body">
+          <p>Mãe, você é o meu espelho em tantas coisas que às vezes nem sei onde você termina e eu começo. Tem gestos meus que na verdade são seus, tem jeitos de pensar que eu jurava serem só meus, até perceber que aprendi tudo observando você.</p>
+          <p>Foi com você que aprendi que amar é dar liberdade. Você nunca segurou meus sonhos, nunca tentou moldar minha vida no seu formato, abriu espaço pra eu voar do meu jeito, no meu tempo, na minha direção, mesmo quando isso significava me ver ir por caminhos diferentes dos seus. Cada "vai, eu estou aqui por você" foi um presente que carrego até hoje, uma certeza silenciosa que me deu coragem pra tentar, errar, recomeçar e tentar de novo.</p>
+          <p>Você nunca soltou a minha mão, mesmo quando deixou meus pés livres pra caminhar sozinhos. Mãe, obrigada por me dar a mão e acompanhar meus passos, levo sempre os meus e os seus sonhos, porque no fundo, eles sempre foram um só.</p>
+        </div>
+      </div>
+      <div class="letter" id="h-avos-mat">
+        <div class="photo-trio">
+          <figure class="trio-cell">
+            <div class="trio-photo"><img src="foto-vo-noeme.jpg" alt="Vó Noeme" style="object-position:center top;" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="trio-fallback"><svg viewBox="0 0 40 40" fill="none"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+          </figure>
+          <figure class="trio-cell">
+            <div class="trio-photo"><img src="foto-avos-mat-juntos.jpg" alt="Avós maternos juntos" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="trio-fallback"><svg viewBox="0 0 40 40" fill="none"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+          </figure>
+          <figure class="trio-cell">
+            <div class="trio-photo"><img src="foto-vo-aramis.jpg" alt="Vô Aramis" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="trio-fallback"><svg viewBox="0 0 40 40" fill="none"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+          </figure>
+        </div>
+        <h3>Avós maternos</h3>
+        <div class="body">
+          <p>Vó Noeme, você é o meu maior exemplo de vida. Guerreira das que não se abalam, empresária que construiu com as próprias mãos o que muitos achavam impossível, você me ensinou que força não é ausência de medo, é seguir mesmo com ele. Não importa o tamanho da tempestade, não importa quantas vezes a vida tenta te derrubar, você se levanta, ajusta a coroa e continua. Cada vez que penso em coragem, penso em você. Cada vez que quero desistir de alguma coisa, lembro que corre no meu sangue a mesma força que nunca deixou você parar.</p>
+          <p>Vô Aramis, você foi mão firme, dessas que educam com poucas palavras e muito exemplo. Não era de grandes discursos, mas cada gesto seu carregava um amor enorme, silencioso, do tipo que a gente só entende o tamanho depois de crescer. Você me ensinou disciplina sem nunca precisar dizer a palavra, e isso ficou guardado em mim pra sempre.</p>
+          <p>Cresci sendo cuidada, incentivada, acolhida, todos os dias, sem exceção. Essa formatura carrega, em cada página, o carinho de tantos anos vividos ao lado de vocês.</p>
+        </div>
+      </div>
+      <div class="letter" id="h-avos-pat">
+        <div class="photo-trio">
+          <figure class="trio-cell">
+            <div class="trio-photo"><img src="foto-vo-iracema.jpg" style="object-position:center top;" alt="Vó Iracema" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="trio-fallback"><svg viewBox="0 0 40 40" fill="none"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+          </figure>
+          <figure class="trio-cell">
+            <div class="trio-photo"><img src="foto-avos-pat-juntos.jpg" style="object-position:center top;" alt="Avós paternos juntos" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="trio-fallback"><svg viewBox="0 0 40 40" fill="none"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+          </figure>
+          <figure class="trio-cell">
+            <div class="trio-photo"><img src="foto-vo-edson.jpg" style="object-position:center top;" alt="Vô Edson" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="trio-fallback"><svg viewBox="0 0 40 40" fill="none"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+          </figure>
+        </div>
+        <h3>Avós paternos</h3>
+        <div class="body">
+          <p>Vó Iracema, você é a pessoa mais doce que eu conheço nessa vida. Seus olhos azuis sempre foram, pra mim, um dos lugares mais bonitos do mundo, daqueles que eu queria ter herdado (risos). Você é feita de colo, de carinho sem medida, do tipo de amor que acalma só de existir por perto. Quando eu era pequena, seu colo era meu porto seguro, e até hoje, quando penso em conforto, penso em você.</p>
+          <p>Vô Edson, você foi bravo quando eu era criança, dessas bravuras que a gente só entende depois, mas o tempo revelou o doce que sempre existiu dentro de você. E foi esse doce que apareceu inteiro, sem medida, em tudo que você fez por mim e, depois, pelo Arthur. Ver você se transformar em avô coruja, cuidando dele com tanto amor, foi um dos presentes mais bonitos que a vida me deu.</p>
+          <p>Vocês dois são a prova viva de que existe amor que não cabe em palavras, só em gestos, em presença, em comida, em cada dia que escolheram estar perto. Obrigada por serem esse colo, essa base, esse abrigo pra toda a nossa família.</p>
+        </div>
+      </div>
+      <div class="letter" id="h-tios">
+        <h3>Tios</h3>
+        <div class="body">
+          <p>Vocês fizeram parte da minha história de tantas formas diferentes, cada um com seu próprio jeito de amar, de ensinar, de estar presente sem nunca precisar ser chamado.</p>
+        </div>
+        <details class="more">
+          <summary><span>Ler homenagem completa</span><svg class="arrow" viewBox="0 0 12 8" fill="none"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.3"/></svg></summary>
+          <div class="body more-body">
+            <p>Tia Vanilda, você é sermão e oração, e eu sei o quanto isso vem de amor. Suas rezas me acompanharam mesmo quando eu não sabia, e sinto que muitas delas chegaram exatamente na hora que eu mais precisava.</p>
+            <div class="hero-photo medium-portrait">
+              <img src="foto-tio-claudiomiro.jpg" alt="Claudiomiro" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');">
+              <div class="hero-photo-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/>
+                  <circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/>
+                  <path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/>
+                </svg><span>sua foto aqui</span></div>
+            </div>
+            <p>Tio Claudiomiro, você foi chão e horizonte ao mesmo tempo. Crescer com você me mostrou o que é ter alguém que acredita antes mesmo de eu acreditar em mim. Você investiu nos meus estudos, na minha criação, na pessoa que eu me tornaria, e fez isso com uma generosidade que eu ainda tento entender do tamanho que é. Você é o meu intelecto, meu parceiro de sempre, aquele com quem aprendi a pensar o mundo de um jeito mais crítico, com humor e acidez. Não existem palavras suficientes pra descrever o quanto eu te devo, e essa conquista é, em grande parte, sua também.</p>
+            <div class="hero-photo medium-portrait">
+              <img src="foto-tio-jose-marcos.jpg" alt="José Marcos" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');">
+              <div class="hero-photo-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/>
+                  <circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/>
+                  <path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/>
+                </svg><span>sua foto aqui</span></div>
+            </div>
+            <p>Tio José Marcos, você nunca faltou. Esteve em cada apresentação de dia dos pais, em cada momento pequeno que pra mim era gigante, sempre com aquele jeito de amigo chato e engraçado que eu tanto amo. Você me ensinou que presença é uma das formas mais bonitas de amor, e que a sua presença em cada momento, cada palavra, em cada detalhe sempre foi importante pra mim.</p>
+            <p>Tio Luiz, você é minha inspiração. Professor, aluno e amigo, sempre com o conselho certo na hora certa. Suas palavras sempre pousaram exatamente onde eu precisava, e olhar pra sua trajetória sempre me lembrou que é possível ir longe sem perder a essência, trazendo orgulho para aqueles que te amam.</p>
+            <div class="hero-photo medium-portrait">
+              <img src="foto-tia-gilmara.jpg" alt="Gilmara" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');">
+              <div class="hero-photo-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/>
+                  <circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/>
+                  <path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/>
+                </svg><span>sua foto aqui</span></div>
+            </div>
+            <p>Tia Gilmara, sua firmeza sempre foi, no fundo, uma forma de cuidado. Você foi a que corrigia, a que não deixava passar, a que estava sempre por perto mesmo quando eu não entendia o tamanho desse zelo. Hoje sei que cada palavra sua, mesmo as mais duras, vinha embrulhada em amor. Obrigada por nunca ter desistido de mim.</p>
+            <p>Tio Paulo, mesmo morando longe, você sempre foi perto no que importa. Sua trajetória de empresário sempre foi um lembrete de que dá pra sonhar grande e ir atrás, e isso me inspirou mais do que você imagina.</p>
+            <p>Tia Amanda, seu jeito bravo por fora sempre escondeu um colo enorme por dentro. Você me ajudou a cuidar do meu filho com uma dedicação que eu nunca vou conseguir agradecer o suficiente, e sua força de trabalho sempre foi um exemplo silencioso pra mim.</p>
+            <p>Tia Josiane, com você aprendi que amizade também pode nascer dentro de casa. As risadas que dividimos ficam guardadas como um dos tesouros mais leves da minha vida, obrigada por ser tia e amiga ao mesmo tempo.</p>
+            <p>Cada um de vocês deixou um pedacinho de si na pessoa que hoje se forma. Essa conquista também é feita de vocês.</p>
+          </div>
+        </details>
+      </div>
+      <div class="letter" id="h-primos">
+        <h3>Meus primos</h3>
+        <div class="body">
+          <p>William, André<span class="inline-photo"><img src="foto-andre.jpg" alt="André" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><span class="inline-fallback"><svg viewBox="0 0 40 40" fill="none"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></span></span>, Gabriel, Aramis, Alana, Afonso, Ana, Thomas, Douglas, Letícia.</p>
+          <p>Primo é aquela mistura estranha de melhor amigo e testemunha de infância, desses que viram tudo, sabem de tudo e ainda assim continuam por perto (ou usam contra você em qualquer churrasco de família, dependendo do dia).</p>
+          <p>Vocês são a bagunça boa da minha vida, os parceiros de zoeira, de resenha, de "não conta pra ninguém" que todo mundo acabou sabendo. Cresci apanhando de brincadeira, ou batendo sem querer, rindo até doer a barriga, dividindo segredo, puxão de orelha e treta boba. Não trocaria uma vírgula de cada história maluca que vivemos juntos.</p>
+          <p>Vocês são minha felicidade, minha implicância favorita, meus amores de sempre. Somos prova viva de que família também é feita de risada e amor que não precisa de motivo. Essa conquista também é nossa, porque cada um de vocês, do seu jeito, fez parte da história que me trouxe até aqui.</p>
+        </div>
+      </div>
+      <div class="letter" id="h-irmaos">
+        <h3>Meus irmãos</h3>
+        <div class="body">
+          <p>Aleph Raphael, você foi meu primeiro amigo, antes mesmo de eu saber o que era amizade. Sempre foi meu parceiro. Você me ensinou a ser lutadora, a não ter medo de me defender, e cada bagunça que vivemos juntos hoje é só motivo de riso e saudade.</p>
+        </div>
+        <details class="more">
+          <summary><span>Ler homenagem completa</span><svg class="arrow" viewBox="0 0 12 8" fill="none"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.3"/></svg></summary>
+          <div class="body more-body">
+            <p>Você carregada amor nos olhos e no coração. Foi parceiro de festas, de madrugadas inteiras, de tantas fases da minha vida, e cada uma delas me deixou um pouco mais forte, um pouco mais eu.</p>
+            <div class="hero-photo letter-portrait">
+              <img src="foto-duda.jpg" alt="Maria Eduarda" style="object-position:center top;" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');">
+              <div class="hero-photo-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/>
+                  <circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/>
+                  <path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/>
+                </svg><span>sua foto aqui</span></div>
+            </div>
+            <p>Maria Eduarda, você é minha metade, não no sentido de ser incompleta sem você, mas no sentido de que existe uma parte de mim que só faz sentido quando está ao seu lado. Poeta das palavras que ninguém mais enxerga, desenhista de sentimentos que eu nem sabia que tinham forma, você sempre soube transformar o comum em algo bonito, e talvez seja por isso que perto de você tudo pareça ter mais cor.</p>
+            <p>Crescemos e o mundo tentou nos colocar em caminhos diferentes, mas você esteve comigo em cada um deles, nas cidades que moramos, nas histórias que só nós duas entendemos, nos silêncios que dizem mais que qualquer conversa. Você me conhece como a palma da sua mão, conhece os meus antes e depois, sabe onde dói e sabe onde cura, muitas vezes sem eu precisar dizer nada.</p>
+            <p>Se a vida é feita de versos, você é o meu preferido, aquele que eu releio sempre que preciso lembrar quem eu sou. Duda, obrigada por ser poesia na minha história, por pintar de beleza os dias mais difíceis e por nunca ter soltado a minha mão, nem quando a distância tentou.</p>
+            <div class="hero-photo letter-portrait">
+              <img src="foto-enzo.jpg" alt="Enzo Gabriel" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');">
+              <div class="hero-photo-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/>
+                  <circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/>
+                  <path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/>
+                </svg><span>sua foto aqui</span></div>
+            </div>
+            <p>Enzo Gabriel, você sempre foi cheio de doçura, tão doce quanto os primeiros pedaços de bolo que sempre fez questão de me dar, como se dividir o melhor pedaço fosse, pra você, a coisa mais natural do mundo. Corre pro campo de bola com o mesmo brilho no olhar de quando conta as histórias de Jesus, como se as duas coisas fossem, no fundo, sobre a mesma fé em algo bom. Meu pequeno coração, você é luz por onde passa, e o mundo é mais gentil com você nele.</p>
+            <div class="hero-photo letter-portrait">
+              <img src="foto-pedro.jpg" alt="Pedro Henrique" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');">
+              <div class="hero-photo-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/>
+                  <circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/>
+                  <path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/>
+                </svg><span>sua foto aqui</span></div>
+            </div>
+            <p>Pedro Henrique, você tem esse jeito enigmático de quem já nasceu com planos guardados que só revela quando quer. Mini empreendedor desde cedo, uma personalidade tão forte quanto a minha, às vezes acho que a gente se entende até no silêncio, sem precisar de palavra nenhuma. Dentro de campo, joga com a mesma determinação de quem sabe exatamente onde quer chegar na vida. Tenho muito orgulho de ver você crescer com tanta clareza de quem é.</p>
+            <div class="hero-photo letter-portrait">
+              <img src="foto-maria-izabel.jpg" alt="Maria Izabel" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');">
+              <div class="hero-photo-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/>
+                  <circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/>
+                  <path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/>
+                </svg><span>sua foto aqui</span></div>
+            </div>
+            <p>Maria Izabel, minha pequenina, meu pedaço mais novo de tudo isso. Que essa conquista possa ser, pra você, a prova de que os sonhos são possíveis. Que você olhe pra mim e enxergue não uma irmã distante, mas um caminho, e que você também é capaz de tudo que quiser sonhar, e que eu estarei sempre aqui, na torcida, do seu lado.</p>
+          </div>
+        </details>
+      </div>
+      <div class="letter" id="h-marido">
+        <div class="hero-photo letter-portrait">
+          <img src="foto-marido.jpg" alt="Meu marido" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');">
+          <div class="hero-photo-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/>
+              <circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/>
+              <path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/>
+            </svg><span>sua foto aqui</span></div>
+        </div>
+        <h3>Meu marido</h3>
+        <div class="body">
+          <p>Elcio, você é o lugar onde eu descanso depois de qualquer batalha. Ao seu lado aprendi o significado real de ser cuidada, sem pedidos, sem cobranças, apenas presença. Você foi apoio silencioso e constante em cada etapa dessa faculdade, segurando comigo o peso dos dias difíceis e comemorando, com o mesmo brilho no olhar, cada pequena vitória.</p>
+          <p>Você acreditou nos meus sonhos como se fossem tão seus quanto meus, e me deu, sem nunca pedir nada de volta, o seu melhor, todos os dias, de todas as formas possíveis. Isso me ensina, constantemente, o que é amar de verdade: sem medida, sem condição.</p>
+          <p>Obrigada por ser meu porto seguro, meu abrigo e meu para sempre. Essa conquista também é sua, porque cada dia ao seu lado foi um degrau a mais nessa caminhada até aqui.</p>
+        </div>
+      </div>
+      <div class="letter" id="h-filho">
+        <div class="hero-photo letter-portrait">
+          <img src="foto-filho.jpg" alt="Meu filho" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');">
+          <div class="hero-photo-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/>
+              <circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/>
+              <path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/>
+            </svg><span>sua foto aqui</span></div>
+        </div>
+        <h3>Meu filho</h3>
+        <div class="body">
+          <p>Arthur, amor da minha vida, daqui a eternidade, nossos destinos foram traçados na maternidade.</p>
+          <p>Há dez anos, quando eu comecei essa faculdade, você, ainda tão pequeno, já dizia: "mãe, você vai ser advogada." Eu não sabia, naquela época, o quanto essa frase simples se tornaria o combustível que me manteve de pé em tantos momentos em que eu mesma duvidei. Você acreditou em mim antes de eu conseguir acreditar por completo, e isso, meu amor, mudou tudo.</p>
+          <p>Você é o meu motivo. O meu incentivo. A razão pela qual eu levantava mesmo cansada, pela qual eu não desistia mesmo quando tudo parecia grande demais. Cada página estudada, cada prova enfrentada, cada noite mal dormida teve o seu rosto como lembrete do porquê de tudo aquilo valer a pena.</p>
+          <p>Hoje, essa conquista se realiza não só pra mim, mas pra aquele menino que, há dez anos, já enxergava em mim o futuro que eu mesma ainda não conseguia ver. Meu filho, você é minha vida, meu maior orgulho e minha eterna certeza de que os caminhos certos, mesmo os mais longos, sempre levam a algum lugar bonito.</p>
+        </div>
+      </div>
+      <div class="letter" id="h-amigos">
+        <h3>Minhas amigas e amigos</h3>
+        <div class="body">
+          <p>Se você recebeu esse convite, sabe a imensidão da minha lealdade, parceria e do meu amor por você. Vocês são minha família de sangue diferente. Cada um com uma personalidade própria, que de algum jeito sempre completou a minha, nas diferenças é que a gente se encontrou, e foi assim que construímos algo tão forte.</p>
+          <p>Nunca soltaram a minha mão, nem nos momentos mais improváveis, nem nos mais variados. Estiveram comigo nas confusões (algumas vezes me tirando delas, outras vezes entrando de cabeça junto comigo), porque amizade de verdade não escolhe só os momentos fáceis. Estiveram também nos meus melhores dias, comemorando comigo cada vitória como se fosse deles também.</p>
+          <p>Me defenderam quando eu nem estava por perto pra saber, e tiveram coragem de me puxar a orelha na minha frente, quando eu precisava ouvir a verdade e não só um afago. Isso, pra mim, sempre foi a prova mais bonita de amizade: aquela que cuida mesmo quando incomoda.</p>
+          <p>Vocês fazem parte dessa história. Cada conquista minha carrega um pouco da força que vocês me deram nos momentos em que eu duvidei de mim. Obrigada por serem, sem escolha de sangue, a família que a vida me deu de presente.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="friends-page">
+  <div class="wrap">
+    <h2 class="section-title" style="color:var(--navy-800)">Meus amigos em fotos</h2>
+    <p class="friends-intro">Um mosaico só pra vocês, que tornaram esse caminho mais leve.</p>
+    <div class="friends-grid">
+      <div class="friends-cell"><img src="foto-amigo-1.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-2.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-3.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-4.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-5.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-6.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-7.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-8.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-9.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-10.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-11.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-12.jpg" alt="" style="object-position:center top;" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-13.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-14.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-15.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-16.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-17.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-18.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-19.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-20.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-21.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-22.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-23.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-24.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-25.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="friends-cell"><img src="foto-amigo-26.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="friends-fallback"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="on-navy jornada">
+  <div class="wrap">
+    <svg class="scales" viewBox="0 0 70 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="35" y1="4" x2="35" y2="46" stroke="#c9a227" stroke-width="1.1"/>
+      <circle cx="35" cy="10" r="2.6" fill="none" stroke="#c9a227" stroke-width="1"/>
+      <line x1="12" y1="16" x2="58" y2="16" stroke="#c9a227" stroke-width="1.1"/>
+      <line x1="12" y1="16" x2="8" y2="32" stroke="#c9a227" stroke-width="0.8"/>
+      <line x1="12" y1="16" x2="16" y2="32" stroke="#c9a227" stroke-width="0.8"/>
+      <path d="M6 32 Q12 40 18 32" stroke="#c9a227" stroke-width="1" fill="none"/>
+      <line x1="58" y1="16" x2="54" y2="32" stroke="#c9a227" stroke-width="0.8"/>
+      <line x1="58" y1="16" x2="62" y2="32" stroke="#c9a227" stroke-width="0.8"/>
+      <path d="M52 32 Q58 40 64 32" stroke="#c9a227" stroke-width="1" fill="none"/>
+      <line x1="35" y1="46" x2="35" y2="52" stroke="#c9a227" stroke-width="1.1"/>
+      <line x1="20" y1="52" x2="50" y2="52" stroke="#c9a227" stroke-width="1.1"/>
+    </svg>
+    <h2 class="section-title">O Direito e eu</h2>
+    <div class="essay">
+      <p>Sempre gostei de debater, de questionar, de me meter em confusão em nome da justiça. Talvez o Direito tenha me escolhido antes de eu escolher ele. Desde cedo, defender os menos favorecidos nunca foi só uma ideia bonita, foi um chamado que eu não conseguia ignorar.</p>
+      <p>O caminho não foi fácil. Foram anos de tempo que pareciam nunca ser suficientes, de dinheiro contado, de noites em que pensei em desistir porque o peso parecia maior que a força que eu tinha naquele momento. Mas sempre que cheguei perto de soltar, algo em mim lembrava do quanto eu amo o Direito, e esse amor foi o que me manteve de pé quando tudo mais pedia pra eu parar.</p>
+      <p>Nesses dez anos, eu não apenas estudei uma profissão, evoluí como pessoa. Aprendi sobre resiliência, sobre paciência, sobre a versão de mim que só existe porque atravessou tudo isso e não desistiu no meio do caminho.</p>
+      <p>Hoje, olhando pra trás, sei de uma coisa com certeza. Eu consegui, e continuo conseguindo, tudo aquilo que me proponho a fazer. Essa formatura é a prova viva disso.</p>
+    </div>
+  </div>
+</section>
+
+<section class="on-navy" id="programacao">
+  <div class="wrap">
+    <h2 class="section-title">Programação</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="time">19h</div>
+        <div class="rail"><div class="dot"></div></div>
+        <div class="content">
+          <h3>Chegada dos formandos</h3>
+          <p>Horário exclusivo para os formandos, antes da chegada dos convidados.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="time">20h</div>
+        <div class="rail"><div class="dot"></div></div>
+        <div class="content">
+          <h3>Jantar</h3>
+          <p>Chegada dos convidados com ingresso Jantar + Baile. Entradinhas servidas nas mesas.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="time">23h</div>
+        <div class="rail"><div class="dot"></div></div>
+        <div class="content">
+          <h3>Baile</h3>
+          <p>Chegada dos convidados com ingresso Baile. Início do cerimonial: entrada individual, cada um com a sua música, seguida de homenagens, brinde e valsa.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="time">5h</div>
+        <div class="rail"><div class="dot"></div></div>
+        <div class="content">
+          <h3>Encerramento</h3>
+          <p>Término do evento.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-cat">
+        <h3>Bar &amp; bebidas</h3>
+        <ul>
+          <li><span class="time">20h às 5h</span>Open bar</li>
+          <li><span class="time">20h às 5h</span>Bar da Heineken e jogos</li>
+          <li><span class="time">20h às 23h</span>Bar de shot</li>
+          <li><span class="time">00h30 às 4h30</span>Barmen</li>
+          <li><span class="time">4h</span>Rodada de tequila</li>
+        </ul>
+      </div>
+      <div class="info-cat">
+        <h3>Buffet</h3>
+        <ul>
+          <li><span class="time">19h</span>Entradinhas, servidas nas mesas</li>
+          <li><span class="time">21h às 23h</span>Buffet americano</li>
+          <li><span class="time">22h</span>Sobremesa, servida nas mesas</li>
+        </ul>
+      </div>
+      <div class="info-cat">
+        <h3>Estrutura &amp; atrações</h3>
+        <ul>
+          <li><span class="time">20h às 2h</span>Espaço kids, com monitora</li>
+          <li><span class="time">20h às 5h</span>Garçom exclusivo</li>
+          <li><span class="time">20h às 5h</span>Ambulância de plantão</li>
+          <li><span class="time">0h às 4h</span>Atrações fotográficas 360°</li>
+          <li><span class="time">00h30 às 2h30</span>Resenha garantida</li>
+          <li><span class="time">2h30 às 5h</span>DJ Tikinho</li>
+        </ul>
+      </div>
+      <div class="info-cat">
+        <h3>Alimentação de madrugada</h3>
+        <ul>
+          <li><span class="time">2h às 3h30</span>Mini hambúrguer, batata frita e mini churros</li>
+          <li>Picolés (sem reposição)</li>
+          <li><span class="time">4h</span>Canja</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="notice">Não é permitida a entrada com caixa térmica ou similar, papel picado/serpentina, ou buzina a gás.</p>
+
+    <div class="venue-card">
+      <iframe src="https://www.google.com/maps?q=-25.5261591,-54.5619704&z=16&output=embed" loading="lazy" title="Mapa do local do evento"></iframe>
+      <div class="addr">
+        <p>Av. João Paulo II, 2703 - Campos do Iguaçu<br>Foz do Iguaçu - PR, 85857-060</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=-25.5261591,-54.5619704" target="_blank" rel="noopener">Como chegar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cardapio">
+  <div class="wrap">
+    <h2 class="section-title" style="color:var(--navy-800)">Cardápio</h2>
+    <div class="menu-grid">
+      <div class="menu-cat">
+        <h3>Entradas</h3>
+        <ul>
+          <li><span class="tag">frita</span><span class="dish">Pérola de camarão com geleia de pimenta</span></li>
+          <li><span class="tag">assada</span><span class="dish">Mini quiche de bacon com cebola caramelizada</span></li>
+          <li><span class="tag">fria</span><span class="dish">Espetadinho de salaminho com azeitona</span></li>
+          <li><span class="tag">finger food</span><span class="dish">Mini penne ao pomodoro</span></li>
+        </ul>
+      </div>
+      <div class="menu-cat">
+        <h3>Prato principal</h3>
+        <ul>
+          <li><span class="dish">Escalope de carne ao molho gorgonzola cremoso, nozes, torrada e mel</span></li>
+          <li><span class="dish">Escalope de frango ao molho cremoso de alho-poró</span></li>
+          <li><span class="dish">Salmão ao molho cítrico de limão siciliano</span></li>
+          <li><span class="dish">Risoto de gorgonzola com mignon</span></li>
+          <li><span class="dish">Nhoque ao molho quatro queijos com bacon</span></li>
+          <li><span class="dish">Rondelli de salmão com cream cheese ao molho de limão siciliano</span></li>
+        </ul>
+      </div>
+      <div class="menu-cat">
+        <h3>Sobremesa</h3>
+        <ul>
+          <li><span class="dish">Brownie com sorvete</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="on-navy" id="ingressos">
+  <div class="wrap">
+    <h2 class="section-title">Ingressos</h2>
+
+    <div class="humor-notes">
+      <p class="joke-lead">(In)felizmente é open bar, open bar, open bar.</p>
+      <p>Mas calma, também tem buffet a noite inteira, porque ninguém dança bem de estômago vazio.</p>
+
+      <p class="joke-lead">Infelizmente, sou formanda e não herdeira.</p>
+      <p>O valor do ingresso está logo abaixo, respira fundo comigo. Mas vai valer cada centavo, e cada taça.</p>
+
+      <ul class="joke-rules">
+        <li>Curta este convite</li>
+        <li>Confirme presença o quanto antes</li>
+        <li>Tire uma foto com a formanda antes da meia-noite, por motivos óbvios</li>
+      </ul>
+
+      <p class="joke-lead">Chegue no horário.</p>
+      <p>Pra não perder a entrada da protagonista da noite (Dra. Khawanny). Sugestão de look: qualquer um que não brigue com o brilho da festa. Ainda nem eu sei a cor do meu vestido, então por enquanto isso também é suspense.</p>
+
+      <p class="joke-lead">Se não puder vir, tudo bem, eu não guardo rancor.</p>
+      <p>Só não me peça pra te tirar da cadeia depois.</p>
+    </div>
+    <div class="tickets">
+      <div class="ticket">
+        <div class="name">Jantar + Baile</div>
+        <div class="price"><sup>R$</sup>265,00</div>
+      </div>
+      <div class="ticket">
+        <div class="name">Baile</div>
+        <div class="price"><sup>R$</sup>145,00</div>
+      </div>
+      <div class="ticket">
+        <div class="name">Mesa extra</div>
+        <div class="price"><sup>R$</sup>300,00</div>
+      </div>
+      <div class="ticket">
+        <div class="name">Meia-entrada (7 a 9 anos)</div>
+        <div class="price"><sup>R$</sup>132,50</div>
+      </div>
+    </div>
+
+    <div class="paymethods">
+      <span>Pix</span><span>Cartão</span><span>Boleto</span>
+    </div>
+
+    <div class="cta-row">
+      <a class="cta" href="https://www.asaas.com/c/rq15veavwndfhio9" id="cta-ingresso" target="_blank" rel="noopener">Garantir presença</a>
+      <p class="cta-note">Vai comprar mais de um ingresso? Some o valor antes de pagar (ex.: 2 Jantar + Baile = R$530,00). O valor pago precisa bater certinho com o(s) ingresso(s) escolhido(s).</p>
+    </div>
+  </div>
+</section>
+
+<section class="gallery">
+  <div class="wrap">
+    <h2 class="section-title" style="color:var(--navy-800)">Um álbum de memórias</h2>
+    <div class="gallery-grid">
+      <div class="gallery-cell"><img src="foto-galeria-1.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="gallery-fallback"><svg viewBox="0 0 40 40" fill="none"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="gallery-cell"><img src="foto-galeria-2.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="gallery-fallback"><svg viewBox="0 0 40 40" fill="none"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="gallery-cell"><img src="foto-galeria-3.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="gallery-fallback"><svg viewBox="0 0 40 40" fill="none"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="gallery-cell"><img src="foto-galeria-4.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="gallery-fallback"><svg viewBox="0 0 40 40" fill="none"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="gallery-cell"><img src="foto-galeria-5.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="gallery-fallback"><svg viewBox="0 0 40 40" fill="none"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="gallery-cell"><img src="foto-galeria-6.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="gallery-fallback"><svg viewBox="0 0 40 40" fill="none"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="gallery-cell"><img src="foto-galeria-7.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="gallery-fallback"><svg viewBox="0 0 40 40" fill="none"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="gallery-cell"><img src="foto-galeria-8.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="gallery-fallback"><svg viewBox="0 0 40 40" fill="none"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+      <div class="gallery-cell"><img src="foto-galeria-9.jpg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('is-empty');"><div class="gallery-fallback"><svg viewBox="0 0 40 40" fill="none"><rect x="6" y="12" width="28" height="20" rx="2" stroke="#c9a227" stroke-width="1.2"/><circle cx="20" cy="22" r="6" stroke="#c9a227" stroke-width="1.2"/><path d="M15 12 L17 8 H23 L25 12" stroke="#c9a227" stroke-width="1.2"/></svg></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fdate">30 de janeiro de 2027</div>
+  <div>Foz do Iguaçu - Paraná</div>
+</footer>
+
+<script>
+  // Countdown até 30/01/2026 20h (horário de Brasília)
+  const eventDate = new Date('2027-01-30T20:00:00-03:00').getTime();
+
+  function updateCountdown(){
+    const now = new Date().getTime();
+    const diff = eventDate - now;
+    const els = {
+      d: document.getElementById('cd-days'),
+      h: document.getElementById('cd-hours'),
+      m: document.getElementById('cd-min'),
+      s: document.getElementById('cd-sec')
+    };
+    if(diff <= 0){
+      els.d.textContent = '00'; els.h.textContent='00'; els.m.textContent='00'; els.s.textContent='00';
+      return;
+    }
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+    const mins = Math.floor((diff % (1000*60*60)) / (1000*60));
+    const secs = Math.floor((diff % (1000*60)) / 1000);
+    els.d.textContent = String(days).padStart(2,'0');
+    els.h.textContent = String(hours).padStart(2,'0');
+    els.m.textContent = String(mins).padStart(2,'0');
+    els.s.textContent = String(secs).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
